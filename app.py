@@ -12,7 +12,7 @@ select = st.sidebar.selectbox('選択',['売上数量','売上金額','売上金
 if data is not None:
     codes = st.sidebar.text_input('商品コードを入力(半角６桁、スペース区切り)')
     li = list(map(str,codes.split()))
-    if codes is not '':
+    if codes != '':
         df = pd.read_csv(data,encoding='cp932')
         df = df[df['店舗']!='合計']
         df = df[df[select]!=0]
