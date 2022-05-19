@@ -1,5 +1,3 @@
-from sqlite3 import DataError
-from tkinter.messagebox import NO
 import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
