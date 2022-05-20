@@ -6,6 +6,9 @@ import japanize_matplotlib
 st.title('商品別散布図作成アプリ')
 data = st.sidebar.file_uploader('ファイル選択',type='csv')
 select = st.sidebar.selectbox('選択',['売上数量','売上金額','売上金額PI'])
+count = st.sidebar.text_input('表示数','5')
+if count != '':
+    count = int(count)
 
 if data is not None:
     codes = st.sidebar.text_input('商品コードを入力(半角６桁、スペース区切り)')
@@ -30,5 +33,5 @@ if data is not None:
             plt.ylabel(select)
             plt.title(name)
             st.pyplot(fig)
-            st.table(df_item[['店舗',select,'平均単価','期間']].set_index('期間').sort_values(select,ascending=False).head(5))
+            st.table(df_item[['店舗',select,'平均単価','期間']].set_index('期間').sort_values(select,ascending=False).head(count))
         
