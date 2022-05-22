@@ -7,6 +7,8 @@ st.title('商品別散布図作成アプリ')
 data = st.sidebar.file_uploader('ファイル選択',type='csv')
 select = st.sidebar.selectbox('選択',['売上数量','売上金額','売上金額PI'])
 count = st.sidebar.text_input('表示数','5')
+tenban = st.sidebar.text_input('店番')
+
 if count != '':
     count = int(count)
 
@@ -15,7 +17,11 @@ if data is not None:
     li = list(map(str,codes.split()))
     if codes != '':
         df = pd.read_csv(data,encoding='cp932')
-        df = df[df['店舗']!='合計']
+        if tenban == '':
+            df = df[df['店舗'] != '合計']
+        else:
+            tenban = tenban.zfill(4)
+            df = df[df['店舗'] == tenban]
         df = df[df[select]!=0]
         df['商品コード'] = df['商品コード'].astype('str').str[-6:]
         for code in li:
